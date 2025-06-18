@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 LABEL \
 	org.opencontainers.image.title="sigrok AppImage x86_64 Build Image" \
 	org.opencontainers.image.description="This image is used to build the sigrok x86_64 AppImage artifacts" \
@@ -34,8 +34,8 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		libglib2.0-dev libglibmm-2.4-dev libzip-dev libusb-1.0-0-dev \
 		libftdi1-dev libhidapi-dev libbluetooth-dev libvisa-dev nettle-dev \
-		libavahi-client-dev libieee1284-3-dev libboost1.65-dev libboost-system1.65-dev \
-		libboost-filesystem1.65-dev libboost-serialization1.65-dev \
+		libavahi-client-dev libieee1284-3-dev libboost1.83-dev libboost-system1.83-dev \
+		libboost-filesystem1.83-dev libboost-serialization1.83-dev \
 	#
 	# Update certificates
 	&& update-ca-certificates \
@@ -51,27 +51,28 @@ RUN apt-get update \
 	&& apt-get update \
 	&& apt-get install -y cmake \
 	#
-	# Install Qt 5.12 from beineri PPA
-	&& sudo add-apt-repository -y ppa:beineri/opt-qt-5.12.10-bionic \
-	&& sudo apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		qt512base qt512svg qt512tools qt512translations \
-	#
-	# Install Qwt 6.1.6
-	&& apt-get install -y mesa-common-dev libgl1-mesa-dev \
-	&& cd /opt \
-	&& wget https://sourceforge.net/projects/qwt/files/qwt/6.1.6/qwt-6.1.6.tar.bz2 \
-	&& tar xf qwt-6.1.6.tar.bz2 \
-	&& cd qwt-6.1.6 \
-	&& qmake qwt.pro \
-	&& make \
-	# Change the QWT_INSTALL_PREFIX in qwtconfig.pri to /usr
-	&& sed -i 's|^\([[:space:]]*QWT_INSTALL_PREFIX[[:space:]]*=[[:space:]]*\)/usr.*$|\1/usr|g' qwtconfig.pri \
-	&& make install \
-	# Cleanup
-	&& cd .. \
-	&& rm qwt-6.1.6.tar.bz2 \
-	&& rm -rf qwt-6.1.6 \
+	# # Install Qt 5.12 from beineri PPA
+	# && sudo add-apt-repository -y ppa:beineri/opt-qt-5.12.10-bionic \
+	# && sudo apt-get update \
+	# && apt-get install -y --no-install-recommends \
+	# 	qt512base qt512svg qt512tools qt512translations \
+	&& apt-get install -y  --no-install-recommends qt6-base-dev linguist-qt6 qt6-tools-dev-tools qt6-tools-dev qt6-svg-dev qtbase5-dev libqt5svg5-dev libqwt-qt5-dev \
+	&& apt-get install -y --no-install-recommends python3-dev \
+	# # Install Qwt 6.1.6
+	# && apt-get install -y mesa-common-dev libgl1-mesa-dev \
+	# && cd /opt \
+	# && wget https://sourceforge.net/projects/qwt/files/qwt/6.1.6/qwt-6.1.6.tar.bz2 \
+	# && tar xf qwt-6.1.6.tar.bz2 \
+	# && cd qwt-6.1.6 \
+	# && qmake qwt.pro \
+	# && make \
+	# # Change the QWT_INSTALL_PREFIX in qwtconfig.pri to /usr
+	# && sed -i 's|^\([[:space:]]*QWT_INSTALL_PREFIX[[:space:]]*=[[:space:]]*\)/usr.*$|\1/usr|g' qwtconfig.pri \
+	# && make install \
+	# # Cleanup
+	# && cd .. \
+	# && rm qwt-6.1.6.tar.bz2 \
+	# && rm -rf qwt-6.1.6 \
 	#
 	# Cleanup apt
 	&& apt-get clean \

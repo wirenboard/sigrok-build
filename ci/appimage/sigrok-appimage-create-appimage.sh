@@ -41,7 +41,7 @@ cp -r "$INSTALL_DIR"/share/sigrok-firmware "$APP_DIR"/usr/share
 
 # Copy extra Python files
 mkdir -p "$APP_DIR"/usr/share/pyshared
-cp -r /usr/lib/python3.8/* "$APP_DIR"/usr/share/pyshared
+cp -r /usr/lib/python3.12/* "$APP_DIR"/usr/share/pyshared
 
 # AppImage build dir
 mkdir -p appimage-build
@@ -64,4 +64,3 @@ fi
 
 export OUTPUT="$ARTIFACT_TITLE-$ARTIFACT_VERSION-$TARGET.AppImage"
 ./linuxdeploy-$ARCH.AppImage --appdir "$APP_DIR" --output appimage $PLUGINS --custom-apprun "$INSTALL_DIR"/AppRun.sh
-
