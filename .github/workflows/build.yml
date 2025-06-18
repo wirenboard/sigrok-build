@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/sigrokproject/sigrok-mxe:latest
+      image: ghcr.io/evgeny-boger/sigrok-mxe:latest
 
     strategy:
       matrix:
@@ -154,7 +154,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/sigrokproject/sigrok-mxe:latest
+      image: ghcr.io/evgeny-boger/sigrok-mxe:latest
 
     strategy:
       matrix:
@@ -257,7 +257,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/sigrokproject/sigrok-appimage-${{ matrix.target.container }}:latest
+      image: ghcr.io/evgeny-boger/sigrok-appimage-${{ matrix.target.container }}:latest
 
     strategy:
       matrix:
@@ -387,7 +387,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/sigrokproject/sigrok-appimage-${{ matrix.target.container }}:latest
+      image: ghcr.io/evgeny-boger/sigrok-appimage-${{ matrix.target.container }}:latest
 
     strategy:
       matrix:
